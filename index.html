@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Хапаль Мария — Веб-разработчик</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=Manrope:wght@400;600&family=Montserrat:wght@500;700;800&display=swap">
+<style>
+:root { --bg-page: #FDF9F1; --text-dark: #2D2A26; --lime: #CCFF00; --peach: #FFC3A0; --pink: #FF6B9E; --card-bg: #FFFFFF; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Manrope', sans-serif; background-color: var(--bg-page); color: var(--text-dark); min-height: 100vh; overflow-x: hidden; }
+
+/* HERO */
+.hero { display: flex; align-items: center; justify-content: center; padding: 60px 20px; min-height: 100vh; position: relative; overflow: hidden; background: linear-gradient(135deg, #FDF9F1 0%, #FFE8D6 50%, #FDF9F1 100%); background-size: 200% 200%; animation: gradientShift 15s ease infinite; }
+@keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+.blob { position: absolute; border-radius: 50%; opacity: 0.35; filter: blur(2px); z-index: 0; pointer-events: none; }
+.blob-1 { width: 120px; height: 120px; background-color: var(--pink); top: 12%; left: 8%; animation: float 8s ease-in-out infinite; }
+.blob-2 { width: 80px; height: 80px; background-color: var(--lime); top: 20%; right: 10%; animation: float 6s ease-in-out infinite 1s; }
+.blob-3 { width: 60px; height: 60px; background-color: var(--peach); bottom: 15%; left: 15%; animation: float 7s ease-in-out infinite 0.5s; }
+.blob-4 { width: 100px; height: 100px; background-color: var(--pink); bottom: 20%; right: 8%; animation: float 9s ease-in-out infinite 2s; }
+@keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-30px) rotate(15deg); } }
+
+.card { display: flex; max-width: 1200px; width: 100%; background: var(--card-bg); border-radius: 40px; border: 4px solid var(--text-dark); box-shadow: 16px 16px 0px var(--peach); overflow: hidden; position: relative; z-index: 2; transition: box-shadow 0.3s ease; }
+.card:hover { box-shadow: 20px 20px 0px var(--peach); }
+.content { flex: 1; padding: 60px; z-index: 2; display: flex; flex-direction: column; justify-content: center; }
+.tag { display: inline-flex; align-items: center; gap: 10px; background-color: var(--lime); color: var(--text-dark); font-weight: 800; padding: 8px 20px; border-radius: 50px; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; border: 3px solid var(--text-dark); align-self: flex-start; margin-bottom: 24px; }
+.tag::before { content: ''; width: 10px; height: 10px; background-color: var(--pink); border-radius: 50%; border: 2px solid var(--text-dark); animation: pulse 1.5s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.7; } }
+
+h1 { font-family: 'Unbounded', sans-serif; font-size: 4.2rem; font-weight: 800; line-height: 1.05; margin-bottom: 24px; letter-spacing: -1px; }
+h1 span { color: var(--pink); display: inline-block; position: relative; }
+h1 span::after { content: ''; position: absolute; bottom: 5px; left: 0; width: 100%; height: 12px; background-color: var(--lime); z-index: -1; transform: rotate(-2deg); }
+.content p { font-size: 1.3rem; line-height: 1.6; color: #666; margin-bottom: 40px; max-width: 95%; }
+.buttons { display: flex; gap: 20px; }
+.btn { text-decoration: none; padding: 18px 36px; border-radius: 100px; font-size: 1.1rem; font-weight: 600; transition: all 0.2s ease; border: 3px solid var(--text-dark); display: inline-block; text-align: center; }
+.btn-main { background-color: var(--lime); color: var(--text-dark); box-shadow: 6px 6px 0px var(--text-dark); }
+.btn-main:active { transform: translate(6px, 6px); box-shadow: 0px 0px 0px var(--text-dark); }
+.btn-main:hover { background-color: #b3e600; transform: translate(-2px, -2px); box-shadow: 8px 8px 0px var(--text-dark); }
+.btn-outline { background-color: var(--card-bg); color: var(--text-dark); }
+.btn-outline:hover { background-color: var(--peach); transform: translate(-2px, -2px); box-shadow: 6px 6px 0px var(--text-dark); }
+
+.photo-wrapper { flex-shrink: 0; width: 450px; background-color: var(--pink); display: flex; align-items: center; justify-content: center; padding: 40px; border-left: 4px solid var(--text-dark); position: relative; }
+.photo-wrapper::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(var(--lime) 3px, transparent 3px); background-size: 30px 30px; opacity: 0.3; z-index: 1; }
+.avatar { width: 100%; max-width: 320px; aspect-ratio: 4/5; object-fit: cover; border-radius: 30px; border: 4px solid var(--text-dark); box-shadow: 12px 12px 0px var(--lime); position: relative; z-index: 2; transition: transform 0.3s ease; background-color: var(--peach); }
+.avatar:hover { transform: translateY(-10px) rotate(2deg) scale(1.03); }
+
+/* MARQUEE */
+.marquee { background-color: var(--text-dark); color: var(--lime); padding: 18px 0; overflow: hidden; white-space: nowrap; border-top: 4px solid var(--text-dark); border-bottom: 4px solid var(--text-dark); font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 1.6rem; letter-spacing: 2px; text-transform: uppercase; position: relative; z-index: 3; }
+.marquee__track { display: inline-block; animation: marqueeScroll 25s linear infinite; }
+.marquee__track span { display: inline-block; padding: 0 30px; }
+.marquee__track span::after { content: '✦'; margin-left: 60px; color: var(--pink); }
+@keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* SECTIONS */
+.section { padding: 100px 20px; border-top: 4px solid var(--text-dark); position: relative; overflow: hidden; }
+.section__container { max-width: 1200px; width: 100%; margin: 0 auto; position: relative; z-index: 1; }
+.section__header { text-align: center; margin-bottom: 60px; }
+.section__title { font-family: 'Unbounded', sans-serif; font-size: 3.4rem; font-weight: 800; color: var(--text-dark); margin-bottom: 20px; letter-spacing: -1px; position: relative; display: inline-block; }
+.section__title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%) scaleX(0); width: 80px; height: 6px; background-color: var(--lime); border-radius: 3px; transition: transform 0.4s ease; }
+.section__title:hover::after { transform: translateX(-50%) scaleX(1); }
+.section__subtitle { font-family: 'Unbounded', sans-serif; font-size: 1.25rem; font-weight: 500; color: var(--text-dark); opacity: 0.9; max-width: 750px; margin: 0 auto; line-height: 1.6; }
+
+/* ACHIEVEMENTS */
+.achievements { background-color: var(--pink); }
+.achievements::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(var(--lime) 3px, transparent 3px); background-size: 40px 40px; opacity: 0.15; pointer-events: none; }
+.achievements__cards { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; align-items: stretch; }
+.achievement-card { background-color: var(--card-bg); border: 4px solid var(--text-dark); border-radius: 30px; box-shadow: 10px 10px 0px var(--text-dark); overflow: hidden; flex: 1 1 320px; max-width: 380px; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.achievement-card:hover { transform: translate(-5px, -5px) rotate(-1deg); box-shadow: 15px 15px 0px var(--lime); }
+.achievement-card__image { width: 100%; height: 190px; border-bottom: 4px solid var(--text-dark); overflow: hidden; background-color: var(--peach); display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
+.achievement-card__image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.achievement-card:hover .achievement-card__image { transform: scale(1.05); }
+.achievement-card__content { padding: 28px; display: flex; flex-direction: column; flex-grow: 1; }
+.achievement-card__title { font-family: 'Montserrat', sans-serif; font-size: 1.35rem; font-weight: 800; line-height: 1.3; margin-bottom: 14px; }
+.achievement-card__text { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 500; line-height: 1.6; color: var(--text-dark); opacity: 0.85; margin-bottom: 24px; flex-grow: 1; }
+.achievement-card__btn { align-self: flex-start; text-decoration: none; background-color: var(--lime); color: var(--text-dark); font-weight: 600; font-size: 1.05rem; padding: 14px 28px; border: 3px solid var(--text-dark); border-radius: 100px; box-shadow: 4px 4px 0px var(--text-dark); transition: all 0.2s ease; }
+.achievement-card__btn:hover { background-color: var(--peach); }
+.achievement-card__btn:active { transform: translate(4px, 4px); box-shadow: 0px 0px 0px var(--text-dark); }
+
+/* SKILLS (ИСПРАВЛЕНА СЕТКА) */
+.skills { background-color: var(--lime); }
+.skills::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(var(--pink) 3px, transparent 3px); background-size: 40px 40px; opacity: 0.2; pointer-events: none; }
+.skills__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; } /* Теперь ровно 4 колонки */
+.skill-card { background-color: var(--card-bg); border: 4px solid var(--text-dark); border-radius: 24px; box-shadow: 8px 8px 0px var(--text-dark); padding: 20px; display: flex; align-items: center; justify-content: center; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden; min-height: 150px; }
+.skill-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.5) 50%, transparent 70%); transform: rotate(45deg) translateX(-100%); transition: transform 0.6s ease; pointer-events: none; }
+.skill-card:hover::before { transform: rotate(45deg) translateX(100%); }
+.skill-card:hover { transform: translate(-4px, -4px) rotate(1deg); box-shadow: 12px 12px 0px var(--pink); }
+.skill-card__title { font-family: 'Montserrat', sans-serif; font-size: 1.3rem; font-weight: 800; line-height: 1.3; color: var(--text-dark); z-index: 1; }
+
+/* PROJECTS */
+.projects { background-color: var(--peach); }
+.projects::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(var(--pink) 3px, transparent 3px); background-size: 40px 40px; opacity: 0.2; pointer-events: none; }
+.projects__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+.project-card { background-color: var(--card-bg); border: 4px solid var(--text-dark); border-radius: 30px; box-shadow: 10px 10px 0px var(--text-dark); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.project-card:hover { transform: translate(-5px, -5px); box-shadow: 15px 15px 0px var(--lime); }
+.project-card__preview { height: 240px; background: linear-gradient(135deg, var(--pink), var(--peach)); border-bottom: 4px solid var(--text-dark); display: flex; align-items: center; justify-content: center; font-family: 'Unbounded', sans-serif; font-size: 4rem; font-weight: 800; color: var(--text-dark); position: relative; overflow: hidden; }
+.project-card__preview::after { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.15) 20px, rgba(255,255,255,0.15) 40px); }
+.project-card__preview span { position: relative; z-index: 1; transition: transform 0.3s ease; }
+.project-card:hover .project-card__preview span { transform: scale(1.2) rotate(-5deg); }
+.project-card__body { padding: 32px; display: flex; flex-direction: column; flex-grow: 1; }
+.project-card__title { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; font-weight: 800; margin-bottom: 14px; }
+.project-card__desc { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 500; line-height: 1.6; color: var(--text-dark); opacity: 0.85; margin-bottom: 24px; flex-grow: 1; }
+.project-card__tags { display: flex; flex-wrap: wrap; gap: 10px; }
+.project-tag { background-color: var(--lime); border: 2px solid var(--text-dark); border-radius: 50px; padding: 8px 16px; font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
+
+/* CONTACTS */
+.contacts { background-color: var(--text-dark); color: var(--bg-page); }
+.contacts .section__title { color: var(--bg-page); }
+.contacts .section__subtitle { color: var(--bg-page); opacity: 0.9; }
+.contacts .section__title::after { background-color: var(--lime); }
+.contacts__grid { display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: auto auto; gap: 30px; }
+.contact-cta { grid-row: 1 / 3; background: linear-gradient(135deg, var(--lime), #a8d400); border: 4px solid var(--text-dark); border-radius: 30px; box-shadow: 10px 10px 0px var(--pink); padding: 50px 40px; display: flex; flex-direction: column; justify-content: center; gap: 24px; color: var(--text-dark); }
+.contact-cta h3 { font-family: 'Unbounded', sans-serif; font-size: 2.5rem; font-weight: 800; line-height: 1.1; }
+.contact-cta p { font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 500; line-height: 1.6; color: var(--text-dark); opacity: 0.9; }
+.contact-cta__btn { align-self: flex-start; text-decoration: none; background-color: var(--text-dark); color: var(--lime); font-weight: 600; font-size: 1.1rem; padding: 18px 36px; border: 3px solid var(--text-dark); border-radius: 100px; box-shadow: 6px 6px 0px var(--pink); transition: all 0.2s ease; }
+.contact-cta__btn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0px var(--pink); }
+.contact-cta__btn:active { transform: translate(6px, 6px); box-shadow: 0px 0px 0px var(--pink); }
+.contact-link { background-color: var(--card-bg); border: 4px solid var(--text-dark); border-radius: 24px; box-shadow: 8px 8px 0px var(--pink); padding: 24px 28px; display: flex; align-items: center; gap: 20px; text-decoration: none; color: var(--text-dark); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.contact-link:hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0px var(--lime); }
+.contact-link__icon { width: 54px; height: 54px; flex-shrink: 0; background-color: var(--peach); border: 3px solid var(--text-dark); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; transition: transform 0.3s ease; }
+.contact-link:hover .contact-link__icon { transform: rotate(-10deg) scale(1.1); background-color: var(--lime); }
+.contact-link__label { font-family: 'Unbounded', sans-serif; font-size: 0.9rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; opacity: 0.6; margin-bottom: 4px; }
+.contact-link__value { font-weight: 600; font-size: 1.1rem; }
+
+/* TO TOP */
+.to-top { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: var(--lime); color: var(--text-dark); border: 3px solid var(--text-dark); border-radius: 50%; box-shadow: 5px 5px 0px var(--text-dark); font-size: 1.6rem; font-weight: 800; display: flex; align-items: center; justify-content: center; text-decoration: none; z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.2s ease; }
+.to-top.visible { opacity: 1; pointer-events: auto; }
+.to-top:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0px var(--text-dark); }
+.to-top:active { transform: translate(5px, 5px); box-shadow: 0px 0px 0px var(--text-dark); }
+
+/* ADAPTIVE */
+@media (max-width: 1050px) {
+    .skills__grid { grid-template-columns: repeat(3, 1fr); } /* На планшетах 3 колонки */
+}
+
+@media (max-width: 950px) {
+.hero { min-height: auto; padding: 40px 15px; }
+.card { flex-direction: column; box-shadow: 10px 10px 0px var(--peach); }
+.content { padding: 40px 30px; text-align: center; }
+h1 { font-size: 3rem; }
+h1 span::after { bottom: 2px; height: 8px; }
+.content p { margin: 0 auto 30px; }
+.tag { align-self: center; }
+.buttons { flex-direction: column; justify-content: center; }
+.photo-wrapper { width: 100%; border-left: none; border-top: 4px solid var(--text-dark); padding: 40px 20px; }
+.avatar { max-width: 260px; }
+.section { padding: 60px 15px; }
+.section__title { font-size: 2.4rem; }
+.section__subtitle { font-size: 1.05rem; }
+.achievements__cards { flex-direction: column; align-items: center; }
+.achievement-card { width: 100%; max-width: 420px; }
+.skills__grid { grid-template-columns: 1fr; gap: 20px; } /* На телефонах 1 колонка */
+.projects__grid { grid-template-columns: 1fr; gap: 24px; }
+.contacts__grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+.contact-cta { grid-row: auto; padding: 40px 30px; }
+.contact-cta h3 { font-size: 2rem; }
+.marquee { font-size: 1.2rem; padding: 14px 0; }
+}
+
+@media (min-width: 600px) and (max-width: 950px) {
+    .skills__grid { grid-template-columns: repeat(2, 1fr); } /* На средних экранах 2 колонки */
+}
+
+@media (prefers-reduced-motion: reduce) {
+*, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero" id="about">
+<div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div><div class="blob blob-4"></div>
+<main class="card">
+<div class="content">
+<div class="tag">Frontend Developer</div>
+<h1>Привет, я<br><span>Мария</span></h1>
+<p>Создаю современные, быстрые и эстетичные интерфейсы. Влюблена в чистый код и продуманный дизайн.</p>
+<div class="buttons">
+<a href="#contacts" class="btn btn-main">Связаться со мной</a>
+<a href="#projects" class="btn btn-outline">Мои работы</a>
+</div>
+</div>
+<div class="photo-wrapper">
+<img src="photo.jpg" alt="Хапаль Мария" class="avatar">
+</div>
+</main>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+<div class="marquee__track">
+<span>HTML</span><span>CSS</span><span>C</span><span>C++</span><span>SQL</span><span>Базы данных</span><span>Windows</span><span>Office</span><span>Agile</span><span>Git</span>
+<span>HTML</span><span>CSS</span><span>C</span><span>C++</span><span>SQL</span><span>Базы данных</span><span>Windows</span><span>Office</span><span>Agile</span><span>Git</span>
+</div>
+</div>
+
+<!-- ACHIEVEMENTS -->
+<section class="section achievements" id="achievements">
+<div class="section__container">
+<div class="section__header">
+<h2 class="section__title">Мои достижения</h2>
+<p class="section__subtitle">Немного цифр и фактов о том, что я успела сделать за последнее время.</p>
+</div>
+<div class="achievements__cards">
+<article class="achievement-card">
+<div class="achievement-card__image"><img src="img/ach1.jpg" alt="Увеличение клиентской базы"></div>
+<div class="achievement-card__content">
+<h3 class="achievement-card__title">Увеличение клиентской базы</h3>
+<p class="achievement-card__text">За последний год количество клиентов выросло на 40%, что подтверждает высокий уровень доверия к моим услугам.</p>
+<a href="#" class="achievement-card__btn">Подробнее</a>
+</div>
+</article>
+<article class="achievement-card">
+<div class="achievement-card__image"><img src="img/ach2.jpg" alt="10+ реализованных проектов"></div>
+<div class="achievement-card__content">
+<h3 class="achievement-card__title">10+ реализованных проектов</h3>
+<p class="achievement-card__text">От лендингов до корпоративных сайтов. Каждый проект — это новый опыт и отточенные навыки вёрстки.</p>
+<a href="#" class="achievement-card__btn">Подробнее</a>
+</div>
+</article>
+<article class="achievement-card">
+<div class="achievement-card__image"><img src="img/ach3.jpg" alt="Средняя оценка 5.0"></div>
+<div class="achievement-card__content">
+<h3 class="achievement-card__title">Средняя оценка 5.0</h3>
+<p class="achievement-card__text">Все выполненные заказы получили максимальные оценки от заказчиков за качество и соблюдение сроков.</p>
+<a href="#" class="achievement-card__btn">Подробнее</a>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<!-- SKILLS -->
+<section class="section skills" id="skills">
+<div class="section__container">
+<div class="section__header">
+<h2 class="section__title">Технологии, которыми я владею</h2>
+<p class="section__subtitle">Инструменты, с которыми я работаю каждый день.</p>
+</div>
+<div class="skills__grid">
+<article class="skill-card"><h3 class="skill-card__title">Язык C</h3></article>
+<article class="skill-card"><h3 class="skill-card__title">C++</h3></article>
+<article class="skill-card"><h3 class="skill-card__title">Базы данных</h3></article>
+<article class="skill-card"><h3 class="skill-card__title">SQL</h3></article>
+<article class="skill-card"><h3 class="skill-card__title">Программы Windows</h3></article>
+<article class="skill-card"><h3 class="skill-card__title">Microsoft Office</h3></article>
+<article class="skill-card"><h3 class="skill-card__title">Гибкие методологии</h3></article>
+<article class="skill-card"><h3 class="skill-card__title">Git и GitHub</h3></article>
+</div>
+</div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section projects" id="projects">
+<div class="section__container">
+<div class="section__header">
+<h2 class="section__title">Мои проекты</h2>
+<p class="section__subtitle">Некоторые из работ, которые я реализовала.</p>
+</div>
+<div class="projects__grid">
+<article class="project-card">
+<div class="project-card__preview"><span>01</span></div>
+<div class="project-card__body">
+<h3 class="project-card__title">Лендинг для стартапа</h3>
+<p class="project-card__desc">Одностраничный сайт с адаптивной вёрсткой, анимациями и формой обратной связи.</p>
+<div class="project-card__tags"><span class="project-tag">HTML</span><span class="project-tag">CSS</span></div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-card__preview"><span>02</span></div>
+<div class="project-card__body">
+<h3 class="project-card__title">Консольная игра на C++</h3>
+<p class="project-card__desc">Логическая игра с использованием ООП, структур данных и работы с памятью.</p>
+<div class="project-card__tags"><span class="project-tag">C++</span><span class="project-tag">ООП</span></div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-card__preview"><span>03</span></div>
+<div class="project-card__body">
+<h3 class="project-card__title">База данных для библиотеки</h3>
+<p class="project-card__desc">Проектирование схемы, создание таблиц и написание сложных SQL-запросов.</p>
+<div class="project-card__tags"><span class="project-tag">SQL</span><span class="project-tag">БД</span></div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-card__preview"><span>04</span></div>
+<div class="project-card__body">
+<h3 class="project-card__title">Сайт-визитка</h3>
+<p class="project-card__desc">Персональный сайт с сеточной вёрсткой на CSS Grid и нестандартным дизайном.</p>
+<div class="project-card__tags"><span class="project-tag">CSS Grid</span><span class="project-tag">Адаптив</span></div>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<!-- CONTACTS -->
+<section class="section contacts" id="contacts">
+<div class="section__container">
+<div class="section__header">
+<h2 class="section__title">Связаться со мной</h2>
+<p class="section__subtitle">Открыта к новым проектам и интересным предложениям.</p>
+</div>
+<div class="contacts__grid">
+<div class="contact-cta">
+<h3>Давайте создадим что-то крутое!</h3>
+<p>Если у вас есть идея для проекта или вы хотите обсудить сотрудничество, напишите мне. Я всегда на связи.</p>
+<a href="mailto:hello@example.com" class="contact-cta__btn">Написать письмо</a>
+</div>
+<a href="#" class="contact-link">
+<div class="contact-link__icon">📱</div>
+<div>
+<div class="contact-link__label">Telegram</div>
+<div class="contact-link__value">@marri_shes</div>
+</div>
+</a>
+<a href="#" class="contact-link">
+<div class="contact-link__icon">💼</div>
+<div>
+<div class="contact-link__label">GitHub</div>
+<div class="contact-link__value">github.com/mashakhapal</div>
+</div>
+</a>
+</div>
+</div>
+</section>
+
+<a href="#about" class="to-top" id="toTop" aria-label="Наверх">↑</a>
+
+<script>
+const toTop = document.getElementById('toTop');
+window.addEventListener('scroll', () => {
+if (window.scrollY > 400) {
+toTop.classList.add('visible');
+} else {
+toTop.classList.remove('visible');
+}
+});
+</script>
+</body>
+</html>
